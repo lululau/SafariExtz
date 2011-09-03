@@ -1,5 +1,9 @@
 var anchors = document.getElementsByTagName("a");
 
+var base_url = location.href;
+var idx = base_url.indexOf("/", 7);
+base_url = base_url.substr(0, idx);
+
 var div = document.createElement("div");
 div.id = "show_url_div";
 div.innerHTML = "<span id='show_url_span'></span>";
@@ -14,7 +18,15 @@ var mouse_over = function(event) {
 	url = url.parentElement;	
     }
 
-    div.innerHTML = "<span id='show_url_span'>" + url.getAttribute("href") + "</span>";
+    var href = url.getAttribute("href");
+
+    if (href.match(/^\//)) {
+	href = base_url + href;
+    } else if (! href.match(/^http:\/\//)) {
+	href = location.href + "/" + href;
+    }
+
+    div.innerHTML = "<span id='show_url_span'>" + href + "</span>";
     div.style.display = "block";
 };
 
