@@ -9,8 +9,12 @@ function contextMessage(e) {
 }
 
 safari.self.addEventListener("message", function(e) {
+	if (window.top != window) {
+		return;
+	}
 	if (e.name === 'show_exif') {
 		alert(e.message);
 	}
+	return false;
 }, false);
 
