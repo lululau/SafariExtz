@@ -1,0 +1,57 @@
+body {
+	background-image: url(./mm_body_bg_repeat.jpg) !important;
+}
+
+.W_miniblog {
+	background-image: url(./mm_body_bg.jpg) !important;
+}
+
+div.logo {
+	visibility: hidden !important;
+}
+
+div#pl_common_fun {
+	visibility: hidden !important;
+}
+
+div[id^="ads"] {
+	visibility: hidden !important;
+
+}
+
+div#pl_content_homeInterest {
+	visibility: hidden !important;
+}
+
+div#pl_content_promotetopic {
+	visibility: hidden !important;
+}
+
+div#pl_relation_recommendPopularUsers {
+	visibility: hidden !important;
+}
+
+div#pl_common_thirdmodule_1005 {
+	visibility: hidden !important;
+}
+
+div#pl_content_topic {
+	visibility: hidden !important;
+}
+
+
+div#pl_common_noticeboard {
+	visibility: hidden !important;
+}
+div#pl_common_help {
+	visibility: hidden !important;
+}
+div#pl_common_feedback {
+	visibility: hidden !important;
+
+}
+
+div#pl_content_allInOne {
+	visibility: hidden !important;
+
+}
