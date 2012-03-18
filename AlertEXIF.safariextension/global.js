@@ -3,8 +3,12 @@ safari.application.addEventListener("command", function(e) {
   BinaryAjax(
     url,
     function(oHTTP) {
-      var exifdata = EXIF.EXIFString(oHTTP.binaryResponse);
-      safari.application.activeBrowserWindow.activeTab.page.dispatchMessage("show_exif", exifdata);
+      try {
+        var exifdata = EXIF.EXIFString(oHTTP.binaryResponse);
+        safari.application.activeBrowserWindow.activeTab.page.dispatchMessage("show_exif", exifdata);
+      } catch (err) {        
+        safari.application.activeBrowserWindow.activeTab.page.dispatchMessage("show_exif", "出错鸟。。。\n" + err);
+      }
     }
   )
 }, false);

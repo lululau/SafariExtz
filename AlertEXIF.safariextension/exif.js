@@ -26,7 +26,7 @@ EXIF.Tags = {
 	0x9101 : "ComponentsConfiguration",	// Information about channels
 	0x9102 : "CompressedBitsPerPixel",	// Compressed bits per pixel
 
-	0x0095 : "LensModel",
+
 	// user information
 	0x927C : "MakerNote",			// Any desired information written by the manufacturer
 	0x9286 : "UserComment",			// Comments by user
@@ -85,7 +85,12 @@ EXIF.Tags = {
 
 	// other tags
 	0xA005 : "InteroperabilityIFDPointer",
-	0xA420 : "ImageUniqueID"		// Identifier assigned uniquely to each image
+	0xA420 : "ImageUniqueID",		// Identifier assigned uniquely to each image
+	0xA432 : "LensInfo", //	rational64u[4]	ExifIFD	(4 rational values giving focal and aperture ranges, called LensSpecification by the EXIF spec.)
+	0xA433 : "LensMake", //	string	ExifIFD	 
+	0xA434 : "LensModel", //	string	ExifIFD	 
+	0xA435 : "LensSerialNumber",
+	0xFDEA : "Lens"
 };
 
 EXIF.TiffTags = {
@@ -122,7 +127,11 @@ EXIF.TiffTags = {
 	0x0131 : "Software",
 	0x013B : "Artist",
 	0x8298 : "Copyright",
-	0x0095 : "LensModel"
+	0xA432 : "LensInfo", //	rational64u[4]	ExifIFD	(4 rational values giving focal and aperture ranges, called LensSpecification by the EXIF spec.)
+	0xA433 : "LensMake", //	string	ExifIFD	 
+	0xA434 : "LensModel", //	string	ExifIFD	 
+	0xA435 : "LensSerialNumber",	
+	0xFDEA : "Lens"	
 }
 
 EXIF.GPSTags = {
@@ -364,12 +373,20 @@ function findEXIFinJPEG(oFile) {
 }
 
 EXIF.EXIFString = function(oFile) {
+
+	function float2exposure(ex){
+		if(ex.toString().indexOf(".")>0){
+			var f = ex.toString().split(".")[1];
+			return "1/" + Math.floor(Math.pow(10, f.length) / parseInt(f.replace(/^0*/, ""))).toString();
+		} else {
+			return ex;
+		}
+	}
 	var exif = findEXIFinJPEG(oFile);
 	var exifString = "";
 	exifString += "相机制造商: " + exif.Make + "\n";
 	exifString += "相机:           " + exif.Model + "\n";
-	exifString += "镜头:           " + exif.LensModel + "\n";
-	exifString += "曝光时间:     " + exif.ExposureTime + "\n";
+	exifString += "曝光时间:     " + float2exposure(exif.ExposureTime) + "\n";
 	exifString += "曝光模式:     " + exif.ExposureProgram + "\n";
 	exifString += "测光模式:     " + exif.MeteringMode + "\n";
 	exifString += "闪光灯:        " + exif.Flash + "\n";
