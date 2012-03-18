@@ -375,10 +375,14 @@ function findEXIFinJPEG(oFile) {
 EXIF.EXIFString = function(oFile) {
 
 	function float2exposure(ex){
-		if(ex.toString().indexOf(".")>0){
-			var f = ex.toString().split(".")[1];
-			return "1/" + Math.floor(Math.pow(10, f.length) / parseInt(f.replace(/^0*/, ""))).toString();
-		} else {
+		try {
+			if(ex.toString().indexOf(".")>0){
+				var f = ex.toString().split(".")[1];
+				return "1/" + Math.floor(Math.pow(10, f.length) / parseInt(f.replace(/^0*/, ""))).toString();
+			} else {
+				return ex;
+			}
+		} catch (err) {
 			return ex;
 		}
 	}
