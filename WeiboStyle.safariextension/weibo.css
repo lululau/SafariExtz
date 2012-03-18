@@ -53,5 +53,8 @@ div#pl_common_feedback {
 
 div#pl_content_allInOne {
 	visibility: hidden !important;
+}
 
+div#pl_content_pullylist {
+	display: none;
 }
