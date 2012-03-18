@@ -1,0 +1,14 @@
+<html>
+<head>
+	<script type="text/javascript">
+		    safari.application.addEventListener("message", function (e) {
+		    	if (e.name != "switch_tab") {
+		    		return;
+		    	}
+		    	safari.application.activeBrowserWindow.tabs[e.message-1].activate();
+		    }, false);
+	</script>
+</head>
+<body>
+</body>
+</html>

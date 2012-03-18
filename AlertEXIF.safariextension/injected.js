@@ -1,5 +1,6 @@
 document.addEventListener("contextmenu", contextMessage, false);
 
+
 function contextMessage(e) {
 	var title = 'NoImage';
 	if (e.target.src.match(/jpe?g/i)){
@@ -17,4 +18,3 @@ safari.self.addEventListener("message", function(e) {
 	}
 	return false;
 }, false);
-
